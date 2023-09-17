@@ -1,0 +1,52 @@
+@keyframes slideIn {
+    from{
+        top: -10vh;
+        opacity: 0;
+    }
+    to{
+        top: 10vh;
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from{
+        top: 10vh;
+        opacity: 1;
+    }
+    to{
+        top: -10vh;
+        opacity: 0;
+    }
+}
+
+.alert{
+    position: relative;
+    display: flex;
+    border: 1px solid rgba(0,0,0, 30%);
+    grid-column: 6 / span 2;
+    max-height: 40px;
+    border-radius: 8px;
+    top: 10vh;
+}
+
+.alert-body{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex: 1 0 100%;
+}
+
+#output{
+    text-align: center;
+    grid-column: span 3;
+}
+
+.inner-text{
+    position: relative;
+    font-size: 19px;
+    top: 11px;
+}
+
+#choice-out{
+    font-weight: bold;
+}

@@ -9,7 +9,37 @@ function onSubmit(e){
     xhr.open("POST", "function.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function () {
-        console.log(xhr.responseText);
+        createAlert(choice, xhr);
+        document.querySelector("#choice-out").innerText = choice;
+        document.querySelector("#total-out").innerText = xhr.responseText;
     }
     xhr.send("choice="+choice+"&num1="+num1+"&num2="+num2);
+}
+
+function createAlert(choice, xhr){
+    let div = document.createElement("div");
+    if(document.querySelector(".alert") != null){
+        document.querySelector("#choice-out").innerText = choice;
+        document.querySelector("#total-out").innerText = xhr.responseText;
+        setInterval(() => div.remove(), 5000);
+        return undefined;
+    }
+    div.className = "alert";
+    div.innerHTML = "<div class=\"alert-body\">\n" +
+        "            <div id=\"output\">" +
+        "               <div class='inner-text'>"+
+        "                <span id=\"choice-out\"></span>\n" +
+        "                :\n" +
+        "                <span id=\"total-out\"></span>" +
+        "               </div>"+
+        "            </div>\n" +
+        "        </div>";
+    div.style.transition = "2s ease-in"
+    div.style.animation = "2s slideIn";
+    setInterval(() => {
+        div.style.transition = "2s ease-in"
+        div.style.animation = "2s slideOut ease-out";
+        setInterval(() => div.remove(), 2000);
+    }, 5000)
+    return document.body.prepend(div);
 }

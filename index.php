@@ -5,6 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./CSS/index.css">
+    <link rel="stylesheet" href="./CSS/alert.css">
     <title>Document</title>
 </head>
 <body>
@@ -13,7 +15,7 @@
             <div class="title-container">
                 <span id="title">PHP Functions</span>
             </div>
-            <div class="body">
+            <div class="container-body">
                 <label for="input1">Input first number: </label>
                 <input name="input1" type="text" id="input1">
                 <label for="input2">Input second number: </label>
