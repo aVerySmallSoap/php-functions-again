@@ -9,37 +9,44 @@ function onSubmit(e){
     xhr.open("POST", "function.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function () {
-        createAlert(choice, xhr);
-        document.querySelector("#choice-out").innerText = choice;
-        document.querySelector("#total-out").innerText = xhr.responseText;
+        if(xhr.responseText === "INVALID"){
+            console.log("ERROR");
+            createAlert("ERROR", "Please fill out all fields!");
+            document.querySelector("#choice-out").innerText = "ERROR";
+            document.querySelector("#total-out").innerText = "Please fill out all fields!";
+        }else{
+            createAlert(choice, xhr);
+            document.querySelector("#choice-out").innerText = choice;
+            document.querySelector("#total-out").innerText = xhr.responseText;
+        }
     }
     xhr.send("choice="+choice+"&num1="+num1+"&num2="+num2);
 }
 
-function createAlert(choice, xhr){
+function createAlert(choice, res){
     let div = document.createElement("div");
     if(document.querySelector(".alert") != null){
         document.querySelector("#choice-out").innerText = choice;
-        document.querySelector("#total-out").innerText = xhr.responseText;
+        document.querySelector("#total-out").innerText = res.responseText;
         setInterval(() => div.remove(), 5000);
-        return undefined;
-    }
-    div.className = "alert";
-    div.innerHTML = "<div class=\"alert-body\">\n" +
-        "            <div id=\"output\">" +
-        "               <div class='inner-text'>"+
-        "                <span id=\"choice-out\"></span>\n" +
-        "                :\n" +
-        "                <span id=\"total-out\"></span>" +
-        "               </div>"+
-        "            </div>\n" +
-        "        </div>";
-    div.style.transition = "2s ease-in"
-    div.style.animation = "2s slideIn";
-    setInterval(() => {
+    }else{
+        div.className = "alert";
+        div.innerHTML = "<div class=\"alert-body\">\n" +
+            "            <div id=\"output\">" +
+            "               <div class='inner-text'>"+
+            "                <span id=\"choice-out\"></span>\n" +
+            "                :\n" +
+            "                <span id=\"total-out\"></span>" +
+            "               </div>"+
+            "            </div>\n" +
+            "        </div>";
         div.style.transition = "2s ease-in"
-        div.style.animation = "2s slideOut ease-out";
-        setInterval(() => div.remove(), 2000);
-    }, 5000)
-    return document.body.prepend(div);
+        div.style.animation = "2s slideIn";
+        setInterval(() => {
+            div.style.transition = "2s ease-in"
+            div.style.animation = "2s slideOut ease-out";
+            setInterval(() => div.remove(), 2000);
+        }, 5000);
+        document.body.prepend(div);
+    }
 }
